@@ -2140,6 +2140,611 @@
   }
 </style>
 
+
+
+<style>
+  /* PATCH FINAL: lockscreen benar-benar tengah + scroll aman + gift box responsif HP */
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  #lockScreen {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding:
+      max(.75rem, var(--safe-top))
+      max(.8rem, var(--safe-right))
+      max(.95rem, var(--safe-bottom))
+      max(.8rem, var(--safe-left)) !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #lockScreen::before,
+  #lockScreen::after {
+    content: '';
+    display: block;
+    flex: 1 0 .75rem;
+    width: 1px;
+    pointer-events: none;
+  }
+
+  #lockScreen .lock-content {
+    flex: 0 0 auto !important;
+    width: min(100%, 720px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: clamp(.5rem, 1.8vw, 1rem) clamp(.5rem, 3vw, 1.15rem) !important;
+  }
+
+  #lockScreen .pulse-glow {
+    margin-bottom: clamp(.55rem, 2vh, 1.35rem) !important;
+  }
+
+  #lockScreen h1 {
+    width: 100% !important;
+    max-width: 680px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+    font-size: clamp(3rem, 9vw, 6.3rem) !important;
+    line-height: .9 !important;
+  }
+
+  #lockScreen h1 span {
+    display: inline-block !important;
+  }
+
+  #lockScreen p {
+    text-align: center !important;
+  }
+
+  #countdownBox {
+    width: min(100%, 620px) !important;
+    max-width: calc(100vw - 1.6rem - var(--safe-left) - var(--safe-right)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #countdownBox .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  #unlockButton {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    visibility: visible !important;
+    max-width: min(100%, 390px) !important;
+    min-height: 54px !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
+  }
+
+  #unlockButton.countdown-ready {
+    opacity: 1 !important;
+    width: min(100%, 390px) !important;
+    position: sticky !important;
+    bottom: max(.75rem, var(--safe-bottom)) !important;
+    z-index: 10050 !important;
+  }
+
+  /* Gift box selalu berada di tengah kolom dan tidak melebar keluar layar. */
+  #jarGame {
+    overflow-x: hidden !important;
+  }
+
+  #jarGame > .relative {
+    border-radius: clamp(1.5rem, 5vw, 3rem) !important;
+  }
+
+  #jarGame .relative.z-10.grid {
+    align-items: center !important;
+    justify-items: center !important;
+  }
+
+  #jarGame .jar-stage {
+    width: 100% !important;
+    min-height: clamp(430px, 72vw, 600px) !important;
+    display: grid !important;
+    place-items: center !important;
+    padding: clamp(.25rem, 1.8vw, 1rem) 0 !important;
+    overflow: visible !important;
+  }
+
+  #jarGame .magic-jar-wrap {
+    position: relative !important;
+    width: min(94vw, 520px) !important;
+    max-width: 100% !important;
+    height: clamp(420px, 70vw, 540px) !important;
+    margin: 0 auto !important;
+    justify-self: center !important;
+    align-self: center !important;
+    transform: none !important;
+    transform-origin: center center !important;
+  }
+
+  #jarGame .jar-lid {
+    top: clamp(72px, 12vw, 88px) !important;
+    width: min(86%, 450px) !important;
+    height: clamp(60px, 10vw, 82px) !important;
+  }
+
+  #jarGame .jar-lid::before {
+    width: clamp(40px, 8vw, 54px) !important;
+    height: clamp(40px, 8vw, 54px) !important;
+  }
+
+  #jarGame .magic-jar {
+    left: 50% !important;
+    bottom: clamp(24px, 4.8vw, 38px) !important;
+    width: min(90%, 438px) !important;
+    height: clamp(292px, 50vw, 358px) !important;
+    border-radius: clamp(24px, 5vw, 34px) !important;
+  }
+
+  #jarGame #jarNotesLayer {
+    inset: clamp(.55rem, 2vw, 1rem) !important;
+  }
+
+  #jarGame .jar-note {
+    width: clamp(60px, 13.5vw, 100px) !important;
+    min-height: clamp(40px, 7.8vw, 56px) !important;
+    padding: clamp(.48rem, 1.45vw, .7rem) clamp(.44rem, 1.55vw, .7rem) !important;
+    font-size: clamp(.52rem, 1.65vw, .8rem) !important;
+  }
+
+  #jarGame .jar-note::before,
+  #jarGame .jar-note::after {
+    width: clamp(15px, 3.5vw, 23px) !important;
+    height: clamp(15px, 3.5vw, 23px) !important;
+  }
+
+  @media (max-width: 1024px) {
+    #jarGame .relative.z-10.grid {
+      grid-template-columns: 1fr !important;
+      text-align: center !important;
+    }
+
+    #jarGame .jar-counter,
+    #jarGame .mt-7.flex {
+      justify-content: center !important;
+      align-items: center !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    #lockScreen {
+      padding:
+        max(.55rem, var(--safe-top))
+        max(.55rem, var(--safe-right))
+        max(.75rem, var(--safe-bottom))
+        max(.55rem, var(--safe-left)) !important;
+    }
+
+    #lockScreen::before,
+    #lockScreen::after {
+      flex-basis: .45rem !important;
+    }
+
+    #lockScreen .lock-content {
+      width: 100% !important;
+      padding: .35rem .45rem !important;
+    }
+
+    #lockScreen .pulse-glow,
+    #lockScreen .text-7xl {
+      font-size: clamp(2.35rem, 10vw, 3rem) !important;
+      margin-bottom: .55rem !important;
+    }
+
+    #lockScreen h1 {
+      font-size: clamp(2.15rem, 10.4vw, 3.25rem) !important;
+      line-height: .88 !important;
+      letter-spacing: -.02em !important;
+    }
+
+    #lockScreen p.mt-5 {
+      margin-top: .65rem !important;
+      max-width: min(100%, 330px) !important;
+      font-size: clamp(.78rem, 3.4vw, .92rem) !important;
+      line-height: 1.45 !important;
+    }
+
+    #countdownBox {
+      margin-top: .82rem !important;
+      padding: .72rem !important;
+      border-radius: 1.25rem !important;
+      max-width: calc(100vw - 1.1rem - var(--safe-left) - var(--safe-right)) !important;
+    }
+
+    #countdownLabel {
+      font-size: .64rem !important;
+      letter-spacing: .14em !important;
+    }
+
+    #countdownBox .mt-4 {
+      margin-top: .65rem !important;
+    }
+
+    #countdownBox .grid {
+      gap: .34rem !important;
+    }
+
+    #countdownBox .grid > div {
+      padding: .5rem .15rem !important;
+      border-radius: .82rem !important;
+      min-width: 0 !important;
+    }
+
+    #countDays,
+    #countHours,
+    #countMinutes,
+    #countSeconds {
+      font-size: clamp(1.15rem, 7vw, 1.75rem) !important;
+      line-height: 1 !important;
+    }
+
+    #unlockStatus {
+      margin-top: .65rem !important;
+      font-size: .72rem !important;
+      line-height: 1.4 !important;
+    }
+
+    #lockMusicButton {
+      margin-top: .68rem !important;
+      padding: .68rem .9rem !important;
+      font-size: .78rem !important;
+      max-width: min(100%, 320px) !important;
+      justify-content: center !important;
+    }
+
+    #lockMusicButton + p {
+      display: none !important;
+    }
+
+    #unlockButton {
+      margin-top: .78rem !important;
+      width: min(100%, 330px) !important;
+      min-height: 50px !important;
+      padding: .78rem .95rem !important;
+      font-size: .88rem !important;
+    }
+
+    #jarGame {
+      padding-left: .75rem !important;
+      padding-right: .75rem !important;
+    }
+
+    #jarGame > .relative {
+      padding: 1rem .75rem 1.15rem !important;
+    }
+
+    #jarGame h2 {
+      font-size: clamp(2rem, 10vw, 3rem) !important;
+      line-height: .98 !important;
+    }
+
+    #jarGame p {
+      font-size: .9rem !important;
+      line-height: 1.65 !important;
+    }
+
+    #jarGame .jar-stage {
+      min-height: clamp(372px, 102vw, 472px) !important;
+      padding: .1rem 0 .4rem !important;
+    }
+
+    #jarGame .magic-jar-wrap {
+      width: min(91vw, 352px) !important;
+      height: clamp(352px, 96vw, 430px) !important;
+    }
+
+    #jarGame .magic-jar-wrap::before,
+    #jarGame .magic-jar-wrap::after {
+      top: clamp(20px, 6vw, 26px) !important;
+      width: clamp(58px, 18vw, 76px) !important;
+      height: clamp(42px, 13vw, 54px) !important;
+    }
+
+    #jarGame .magic-jar-wrap::before {
+      left: calc(50% - clamp(64px, 20vw, 82px)) !important;
+    }
+
+    #jarGame .magic-jar-wrap::after {
+      right: calc(50% - clamp(64px, 20vw, 82px)) !important;
+    }
+
+    #jarGame .jar-lid {
+      top: clamp(58px, 17vw, 74px) !important;
+      width: min(86%, 318px) !important;
+      height: clamp(50px, 14vw, 60px) !important;
+      border-radius: 22px 22px 16px 16px !important;
+    }
+
+    #jarGame .jar-lid::before {
+      top: -14px !important;
+      width: clamp(32px, 10vw, 40px) !important;
+      height: clamp(32px, 10vw, 40px) !important;
+    }
+
+    #jarGame .magic-jar {
+      width: min(88%, 318px) !important;
+      height: clamp(238px, 66vw, 292px) !important;
+      bottom: clamp(20px, 6vw, 26px) !important;
+      border-radius: 22px !important;
+    }
+
+    #jarGame #jarNotesLayer {
+      inset: .55rem !important;
+    }
+
+    #jarGame .jar-note {
+      width: clamp(48px, 16vw, 68px) !important;
+      min-height: 36px !important;
+      padding: .42rem .34rem !important;
+      font-size: clamp(.46rem, 2.2vw, .55rem) !important;
+      box-shadow: 0 9px 18px rgba(0,0,0,.20), inset 0 0 0 1.5px rgba(255,134,200,.34) !important;
+    }
+
+    #jarGame .jar-note::before,
+    #jarGame .jar-note::after {
+      width: 14px !important;
+      height: 14px !important;
+    }
+
+    #jarGame .jar-note::before { left: -5px !important; }
+    #jarGame .jar-note::after { right: -5px !important; }
+
+    #jarGame .jar-note span small {
+      font-size: .48em !important;
+      letter-spacing: .08em !important;
+    }
+  }
+
+  @media (max-width: 380px) {
+    #lockScreen h1 {
+      font-size: clamp(1.88rem, 9.6vw, 2.65rem) !important;
+    }
+
+    #lockScreen .pulse-glow,
+    #lockScreen .text-7xl {
+      font-size: 2.25rem !important;
+    }
+
+    #countdownBox {
+      padding: .6rem !important;
+    }
+
+    #countdownBox .grid {
+      gap: .25rem !important;
+    }
+
+    #countdownBox .grid > div {
+      padding: .42rem .1rem !important;
+    }
+
+    #jarGame .magic-jar-wrap {
+      width: min(90vw, 320px) !important;
+      height: 342px !important;
+    }
+
+    #jarGame .jar-stage {
+      min-height: 358px !important;
+    }
+
+    #jarGame .magic-jar {
+      height: 230px !important;
+    }
+  }
+
+  @media (max-height: 620px) and (max-width: 520px) {
+    #lockScreen h1 {
+      font-size: clamp(1.75rem, 8.6vw, 2.35rem) !important;
+    }
+
+    #lockScreen .pulse-glow,
+    #lockScreen .text-7xl {
+      font-size: 2.1rem !important;
+      margin-bottom: .35rem !important;
+    }
+
+    #countdownBox {
+      margin-top: .48rem !important;
+    }
+
+    #unlockButton,
+    #lockMusicButton {
+      margin-top: .48rem !important;
+    }
+  }
+</style>
+
+
+
+<style id="audio-lockscreen-layout-final-fix">
+  /* FIX TERAKHIR: lockscreen tetap rapi saat countdown selesai dan audio tidak tabrakan */
+  #lockScreen {
+    display: block !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 0 !important;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #lockScreen .lock-content {
+    position: relative !important;
+    z-index: 10 !important;
+    width: min(100%, 690px) !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    margin: 0 auto !important;
+    padding: max(1rem, var(--safe-top)) max(.9rem, var(--safe-right)) max(1.1rem, var(--safe-bottom)) max(.9rem, var(--safe-left)) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  #lockScreen .pulse-glow {
+    margin-bottom: clamp(.65rem, 2vh, 1.4rem) !important;
+  }
+
+  #lockScreen h1 {
+    width: 100% !important;
+    max-width: 680px !important;
+    text-align: center !important;
+    font-size: clamp(2.65rem, 9.8vw, 6.15rem) !important;
+    line-height: .9 !important;
+    margin: 0 auto !important;
+  }
+
+  #lockScreen p.mt-5 {
+    margin-top: clamp(.75rem, 1.8vh, 1.25rem) !important;
+    max-width: 38rem !important;
+    line-height: 1.55 !important;
+  }
+
+  #countdownBox {
+    width: min(100%, 620px) !important;
+    max-width: calc(100vw - 1.8rem - var(--safe-left) - var(--safe-right)) !important;
+    margin: clamp(1rem, 2.4vh, 1.8rem) auto 0 !important;
+    padding: clamp(.85rem, 2vw, 1.25rem) !important;
+    border-radius: clamp(1.2rem, 4vw, 2rem) !important;
+  }
+
+  #countdownBox .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: clamp(.35rem, 1.6vw, .75rem) !important;
+  }
+
+  #countdownBox .grid > div {
+    padding: clamp(.52rem, 2vw, 1rem) clamp(.18rem, 1vw, .7rem) !important;
+  }
+
+  #countDays, #countHours, #countMinutes, #countSeconds {
+    font-size: clamp(1.35rem, 7vw, 2.65rem) !important;
+    line-height: 1 !important;
+  }
+
+  #lockMusicButton {
+    margin-top: clamp(.8rem, 2vh, 1.25rem) !important;
+  }
+
+  #unlockButton,
+  #unlockButton.countdown-ready {
+    position: relative !important;
+    inset: auto !important;
+    bottom: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: min(100%, 390px) !important;
+    max-width: calc(100vw - 2rem) !important;
+    min-height: 54px !important;
+    margin: clamp(1rem, 2.3vh, 1.8rem) auto 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    text-align: center !important;
+    white-space: normal !important;
+    transform: none !important;
+    line-height: 1.25 !important;
+    z-index: 10010 !important;
+  }
+
+  #unlockButton.countdown-ready {
+    animation: readyPulse 1.15s ease-in-out infinite !important;
+    box-shadow: 0 0 32px rgba(255,79,168,.8), 0 14px 42px rgba(0,0,0,.36) !important;
+  }
+
+  @media (max-width: 520px) {
+    #lockScreen .lock-content {
+      width: 100% !important;
+      padding-left: max(.85rem, var(--safe-left)) !important;
+      padding-right: max(.85rem, var(--safe-right)) !important;
+    }
+
+    #lockScreen .pulse-glow {
+      font-size: clamp(2.5rem, 12vw, 3.4rem) !important;
+      margin-bottom: .65rem !important;
+    }
+
+    #lockScreen h1 {
+      font-size: clamp(2.25rem, 12vw, 3.7rem) !important;
+    }
+
+    #lockScreen p.mt-5 {
+      font-size: .9rem !important;
+      margin-top: .7rem !important;
+    }
+
+    #countdownLabel {
+      font-size: .68rem !important;
+      letter-spacing: .15em !important;
+    }
+
+    #unlockStatus {
+      font-size: .76rem !important;
+      line-height: 1.45 !important;
+    }
+
+    #lockMusicButton {
+      padding: .74rem 1rem !important;
+      font-size: .82rem !important;
+      max-width: 100% !important;
+    }
+
+    #lockMusicButton + p {
+      display: none !important;
+    }
+  }
+
+  @media (max-height: 680px) {
+    #lockScreen .lock-content {
+      min-height: auto !important;
+      justify-content: flex-start !important;
+      padding-top: max(.8rem, var(--safe-top)) !important;
+      padding-bottom: max(1.2rem, var(--safe-bottom)) !important;
+    }
+  }
+
+  @media (max-height: 590px) and (max-width: 520px) {
+    #lockScreen .pulse-glow { margin-bottom: .45rem !important; }
+    #lockScreen h1 { font-size: clamp(1.95rem, 10vw, 2.8rem) !important; }
+    #countdownBox { margin-top: .55rem !important; }
+    #lockMusicButton { margin-top: .55rem !important; }
+    #unlockButton, #unlockButton.countdown-ready { margin-top: .6rem !important; min-height: 48px !important; }
+  }
+</style>
+
 </head>
 
 <body class="font-inter">
@@ -2159,7 +2764,7 @@
 
   <!-- AUDIO TERPISAH -->
   <!-- Untuk lockscreen: simpan lagu dengan nama lagu-lockscreen.mp3 -->
-  <audio id="lockscreenSong" preload="auto" autoplay loop>
+  <audio id="lockscreenSong" preload="auto" loop>
     <source src="./lagu.mp3" type="audio/mpeg" />
   </audio>
 
@@ -2247,7 +2852,7 @@
       <span id="lockMusicWave" class="music-wave hidden items-center justify-center">
         <span></span><span></span><span></span><span></span><span></span>
       </span>
-      <span id="lockMusicText">Lagu Lockscreen</span>
+      <span id="lockMusicText">Lagu</span>
     </button>
 
     <p class="mt-3 max-w-md text-xs sm:text-sm font-semibold text-white/55">
@@ -2304,7 +2909,7 @@
 
           <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row sm:flex-wrap md:justify-start">
             <a href="#gallery" class="btn-main rounded-full bg-gradient-to-r from-magenta to-candy px-8 py-4 text-center font-black text-white shadow-neon transition hover:-translate-y-1">
-              Lihat Galeri Kita 📸
+              Foto 📸
             </a>
             <a href="#photoHanger" class="rounded-full border border-white/18 bg-white/10 px-8 py-4 text-center font-black text-white backdrop-blur-xl transition hover:-translate-y-1 hover:bg-magenta/90 hover:text-white">
               Gantung Foto 📎
@@ -2313,7 +2918,7 @@
               Buka Surat Cinta 💌
             </a>
             <a href="#jarGame" class="rounded-full border border-white/18 bg-white/10 px-8 py-4 text-center font-black text-white backdrop-blur-xl transition hover:-translate-y-1 hover:bg-magenta/90 hover:text-white">
-              Main Box 🎮
+              Main Box 
             </a>
           </div>
 
@@ -2441,7 +3046,7 @@
         <div class="photo-hanger-bg"></div>
 
         <div class="reveal mx-auto mb-10 max-w-3xl text-center">
-          <p class="inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-2 font-black text-blush backdrop-blur-xl">📎 Game Gantung Foto</p>
+          <p class="inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-2 font-black text-blush backdrop-blur-xl">Gantung Foto</p>
           <h2 class="mt-5 text-4xl font-black md:text-6xl gradient-text">Jepit Foto Kita di Tali</h2>
           <p class="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/65 md:text-lg">
             Geser foto polaroid dari kanan ke dua tali di kiri, atau cukup tap sekali agar foto langsung terjepit otomatis.
@@ -2568,7 +3173,7 @@
 
         <div class="relative z-10 grid gap-10 lg:grid-cols-[.82fr_1.18fr] lg:items-center">
           <div class="text-center lg:text-left">
-            <p class="inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-2 font-black text-blush backdrop-blur-xl">🎮 Game Ucapan</p>
+            <p class="inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-2 font-black text-blush backdrop-blur-xl">Klik Ucapan</p>
             <h2 class="mt-5 text-4xl font-black md:text-6xl gradient-text">Gift Box untuk Sayangku</h2>
             <p class="mt-5 text-base leading-8 text-white/65 md:text-lg">
               Di dalam gift box ini ada ucapan-ucapan kecil. Klik salah satu gulungan kertasnya,
@@ -2813,6 +3418,8 @@
     let particleAnimationStarted = false;
     let countdownTimer = null;
     let midnightCelebrationStarted = false;
+    let allowLockAudio = true;
+    let websiteAudioMode = false;
     const isMobileDevice = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const lowPowerMode = isMobileDevice || reduceMotion || ((navigator.hardwareConcurrency || 8) <= 4);
@@ -2849,10 +3456,9 @@
           unlockButton.disabled = false;
           unlockButton.hidden = false;
           unlockButton.classList.add('countdown-ready');
-          unlockButton.innerHTML = '🎆 Buka Sayangku Sekarang 💖';
+          unlockButton.innerHTML = 'Buka Sayang 💖';
           if (unlockButton.dataset.readyShown !== 'true') {
             unlockButton.dataset.readyShown = 'true';
-            setTimeout(() => unlockButton.scrollIntoView({ block: 'center', behavior: 'smooth' }), 180);
           }
         }
         startMidnightCelebration();
@@ -2934,17 +3540,7 @@
       showCelebrationFlash();
       if (!lowPowerMode) startParticles();
 
-      if (lockSong) {
-        lockSong.pause();
-        lockSong.currentTime = 0;
-        setLockMusicState(false);
-      }
-
-      song.volume = 0.65;
-      song.muted = false;
-      song.play()
-        .then(() => setMainMusicState(true))
-        .catch(() => setMainMusicState(false));
+      startWebsiteAudioOnly();
 
       lockScreen.style.transition = 'opacity .9s ease, transform .9s ease, filter .9s ease';
       lockScreen.style.opacity = '0';
@@ -2967,6 +3563,67 @@
       answerInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') checkAnswer();
       });
+    }
+
+    function safePauseAudio(audio) {
+      if (!audio) return;
+      try { audio.pause(); } catch (error) {}
+      try { audio.currentTime = 0; } catch (error) {}
+    }
+
+    function stopLockAudioCompletely() {
+      allowLockAudio = false;
+      if (!lockSong) return;
+      safePauseAudio(lockSong);
+      lockSong.muted = true;
+      lockSong.loop = false;
+      lockSong.removeAttribute('autoplay');
+      setLockMusicState(false);
+    }
+
+    function stopWebsiteAudioCompletely() {
+      if (!song) return;
+      safePauseAudio(song);
+      song.muted = true;
+      setMainMusicState(false);
+    }
+
+    function startLockAudioOnly() {
+      if (!lockSong || !allowLockAudio || websiteAudioMode || lockScreen.classList.contains('hidden')) return Promise.resolve(false);
+      if (song) {
+        safePauseAudio(song);
+        song.muted = true;
+        setMainMusicState(false);
+      }
+      lockSong.loop = true;
+      lockSong.volume = 0.65;
+      lockSong.muted = false;
+      return lockSong.play()
+        .then(() => {
+          if (!allowLockAudio || websiteAudioMode || lockScreen.classList.contains('hidden')) {
+            stopLockAudioCompletely();
+            return false;
+          }
+          setLockMusicState(true);
+          return true;
+        })
+        .catch(() => {
+          setLockMusicState(false);
+          return false;
+        });
+    }
+
+    function startWebsiteAudioOnly() {
+      websiteAudioMode = true;
+      stopLockAudioCompletely();
+      if (!song) return;
+      song.loop = true;
+      song.volume = 0.65;
+      song.muted = false;
+      try { song.currentTime = 0; } catch (error) {}
+      song.play()
+        .then(() => setMainMusicState(true))
+        .catch(() => setMainMusicState(false));
     }
 
     function setMainMusicState(isPlaying) {
@@ -3004,19 +3661,14 @@
     }
 
     function toggleLockMusic() {
-      if (!lockSong) return;
-      lockSong.volume = 0.65;
-      lockSong.muted = false;
+      if (!lockSong || websiteAudioMode || lockScreen.classList.contains('hidden')) return;
       if (lockSong.paused) {
-        lockSong.play().then(() => {
-          setLockMusicState(true);
-          popHearts(window.innerWidth / 2, window.innerHeight / 2, lightCount(12, 5));
-        }).catch(() => {
-          setLockMusicState(false);
-          if (lockMusicText) lockMusicText.textContent = 'Klik Lagi untuk Putar';
+        startLockAudioOnly().then((played) => {
+          if (played) popHearts(window.innerWidth / 2, window.innerHeight / 2, lightCount(12, 5));
+          if (!played && lockMusicText) lockMusicText.textContent = 'Klik Lagi untuk Putar';
         });
       } else {
-        lockSong.pause();
+        safePauseAudio(lockSong);
         setLockMusicState(false);
       }
     }
@@ -3037,38 +3689,29 @@
     }
 
     function tryAutoplayMusic() {
-      if (!lockSong || !lockSong.paused || lockScreen.classList.contains('hidden')) return;
-      lockSong.volume = 0.65;
-      lockSong.muted = false;
-
-      const playPromise = lockSong.play();
-      if (playPromise && typeof playPromise.then === 'function') {
-        playPromise.then(() => {
-          setLockMusicState(true);
+      if (!lockSong || !lockSong.paused || !allowLockAudio || websiteAudioMode || lockScreen.classList.contains('hidden')) return;
+      startLockAudioOnly().then((played) => {
+        if (played) {
           if (lockMusicText && !lockScreen.classList.contains('hidden')) {
-            lockMusicText.textContent = 'Lagu Lockscreen Otomatis Menyala';
+            lockMusicText.textContent = 'ILYSB-LANY';
           }
-        }).catch(() => {
-          setLockMusicState(false);
+        } else {
           if (lockMusicText && !lockScreen.classList.contains('hidden')) {
             lockMusicText.textContent = 'Ketuk Jika Lagu Belum Bunyi';
           }
-        });
-      }
+        }
+      });
     }
 
     function prepareAutoplayFallback() {
       const startMusicOnce = () => {
-        if (lockScreen.classList.contains('hidden')) return;
+        if (!allowLockAudio || websiteAudioMode || lockScreen.classList.contains('hidden')) return;
         if (lockSong && lockSong.paused) {
-          lockSong.volume = 0.65;
-          lockSong.muted = false;
-          lockSong.play().then(() => {
-            setLockMusicState(true);
-            if (lockMusicText && !lockScreen.classList.contains('hidden')) {
+          startLockAudioOnly().then((played) => {
+            if (played && lockMusicText && !lockScreen.classList.contains('hidden')) {
               lockMusicText.textContent = 'Lagu Lockscreen Diputar';
             }
-          }).catch(() => setLockMusicState(false));
+          });
         }
       };
 
@@ -3156,7 +3799,7 @@
 
       const toast = document.createElement('div');
       toast.className = 'midnight-toast';
-      toast.innerHTML = '🎆 Sekarang waktunya! Happy Birthday, Sayangku 💖';
+      toast.innerHTML = 'Sekarang waktunya! Happy Birthday, Sayangku 💖';
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 5400);
     }
