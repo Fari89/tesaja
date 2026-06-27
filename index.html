@@ -2816,6 +2816,207 @@
   }
 </style>
 
+
+<style id="story-slide-style">
+  /* =========================
+     MODE SLIDE PER SECTION
+     Setiap section di mainWebsite tampil satu-satu seperti slide.
+  ========================== */
+  #mainWebsite.story-mode {
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-bottom: 0 !important;
+  }
+
+  #mainWebsite.story-mode > section.story-slide {
+    display: none !important;
+    min-height: 100vh;
+    min-height: 100svh;
+    width: 100%;
+    padding-bottom: max(6.5rem, calc(5rem + var(--safe-bottom))) !important;
+    position: relative;
+  }
+
+  @supports (height: 100dvh) {
+    #mainWebsite.story-mode > section.story-slide {
+      min-height: 100dvh;
+    }
+  }
+
+  #mainWebsite.story-mode > section.story-slide.active {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    animation: slideSectionIn .55s cubic-bezier(.2, 1, .35, 1) both;
+  }
+
+  @keyframes slideSectionIn {
+    from {
+      opacity: 0;
+      transform: translateX(28px) scale(.985);
+      filter: blur(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  .slide-next-area {
+    width: min(calc(100% - 2rem), 760px);
+    margin: clamp(1.4rem, 4vw, 2.6rem) auto 0;
+    padding: .9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.16);
+    background: linear-gradient(135deg, rgba(255,79,168,.18), rgba(255,255,255,.07));
+    box-shadow: 0 20px 60px rgba(0,0,0,.28), 0 0 30px rgba(255,79,168,.16) inset;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .slide-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .85rem;
+    flex-wrap: wrap;
+  }
+
+  .slide-step-text {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    color: rgba(255,234,245,.78);
+    font-size: .82rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding-left: .65rem;
+  }
+
+  .slide-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .35rem;
+    flex: 1 1 120px;
+  }
+
+  .slide-dot {
+    width: .55rem;
+    height: .55rem;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(255,255,255,.28);
+    box-shadow: 0 0 0 rgba(255,79,168,0);
+    cursor: pointer;
+    transition: width .25s ease, background .25s ease, box-shadow .25s ease, transform .25s ease;
+  }
+
+  .slide-dot.active {
+    width: 1.65rem;
+    background: linear-gradient(90deg, #ff4fa8, #ffc5e3);
+    box-shadow: 0 0 18px rgba(255,79,168,.65);
+  }
+
+  .slide-buttons {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+  }
+
+  .slide-back-btn,
+  .slide-next-btn {
+    border: 0;
+    border-radius: 999px;
+    min-height: 48px;
+    padding: .85rem 1.15rem;
+    font-weight: 1000;
+    color: #fff;
+    cursor: pointer;
+    transition: transform .22s ease, filter .22s ease, opacity .22s ease;
+    touch-action: manipulation;
+  }
+
+  .slide-back-btn {
+    background: rgba(255,255,255,.11);
+    border: 1px solid rgba(255,255,255,.16);
+    color: rgba(255,234,245,.86);
+  }
+
+  .slide-next-btn {
+    background: linear-gradient(90deg, #ff4fa8, #ff86c8, #ff4fa8);
+    background-size: 200% 100%;
+    box-shadow: 0 0 28px rgba(255,79,168,.45);
+  }
+
+  .slide-back-btn:hover,
+  .slide-next-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: brightness(1.08);
+  }
+
+  .slide-back-btn:active,
+  .slide-next-btn:active {
+    transform: scale(.96);
+  }
+
+  .slide-back-btn.is-disabled {
+    opacity: .38;
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    #mainWebsite.story-mode > section.story-slide {
+      padding-top: max(3.75rem, var(--safe-top)) !important;
+      padding-bottom: max(7rem, calc(5.75rem + var(--safe-bottom))) !important;
+    }
+
+    .slide-next-area {
+      width: min(calc(100% - 1rem), 560px);
+      border-radius: 1.35rem;
+      padding: .75rem;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .slide-nav-inner {
+      justify-content: center;
+    }
+
+    .slide-step-text {
+      width: 100%;
+      justify-content: center;
+      padding-left: 0;
+      font-size: .72rem;
+    }
+
+    .slide-dots {
+      order: 2;
+      width: 100%;
+      flex: 0 0 100%;
+      overflow-x: auto;
+      padding: .1rem .25rem;
+    }
+
+    .slide-buttons {
+      order: 1;
+      width: 100%;
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+    }
+
+    .slide-back-btn,
+    .slide-next-btn {
+      width: 100%;
+      min-height: 50px;
+      padding: .85rem .7rem;
+      font-size: .9rem;
+    }
+  }
+</style>
+
 </head>
 
 <body class="font-inter">
@@ -2826,7 +3027,9 @@
     3. Letakkan lagu isi website di folder yang sama dengan nama: lagu-website.mp3
     4. Letakkan video opening di folder yang sama dengan nama: bg-video.mp4
     5. Letakkan foto dengan nama: foto1.jpeg sampai foto8.jpeg
-    6. Ubah jawaban teka-teki di bagian CONFIG pada script paling bawah.
+    6. Letakkan video moment di folder yang sama dengan nama: moment-video.mp4
+    7. Opsional: letakkan cover video dengan nama: moment-cover.jpeg
+    8. Ubah jawaban teka-teki di bagian CONFIG pada script paling bawah.
   ========================== -->
 
   <div class="aurora"></div>
@@ -2955,7 +3158,7 @@
   <!-- ========================= MAIN WEBSITE ========================== -->
   <main id="mainWebsite" class="hidden relative z-10 pb-20 md:pb-0">
     <!-- HERO -->
-    <section id="home" class="relative min-h-screen overflow-hidden px-5 pb-16 pt-28 md:pt-32 flex items-center">
+    <section id="home" class="relative min-h-screen overflow-hidden px-5 pb-16 pt-28 md:pt-32 flex flex-col items-center justify-center">
       <div class="absolute -left-32 top-20 h-80 w-80 rounded-full bg-magenta/25 blur-3xl"></div>
       <div class="absolute -right-32 bottom-20 h-96 w-96 rounded-full bg-candy/20 blur-3xl"></div>
       <div class="absolute left-[8%] top-[18%] text-6xl opacity-45 float-soft">💘</div>
@@ -3004,19 +3207,20 @@
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- MARQUEE -->
-    <section class="overflow-hidden border-y border-white/10 bg-white/5 py-4 backdrop-blur-xl">
-      <div class="marquee text-lg font-black text-blush/90">
-        <span class="mx-8">Happy Birthday, Sayangku 💖</span>
-        <span class="mx-8">You are loved 🌸</span>
-        <span class="mx-8">20 looks beautiful on you ✨</span>
-        <span class="mx-8">My favorite person 💌</span>
-        <span class="mx-8">Happy Birthday, Sayangku 💖</span>
-        <span class="mx-8">You are loved 🌸</span>
-        <span class="mx-8">20 looks beautiful on you ✨</span>
-        <span class="mx-8">My favorite person 💌</span>
+
+      <!-- MARQUEE DIGABUNG DENGAN SLIDE 1 -->
+      <div class="reveal mt-8 w-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 py-4 shadow-pinksoft backdrop-blur-xl">
+        <div class="marquee text-base font-black text-blush/90 sm:text-lg">
+          <span class="mx-8">Happy Birthday, Sayangku 💖</span>
+          <span class="mx-8">You are loved 🌸</span>
+          <span class="mx-8">20 looks beautiful on you ✨</span>
+          <span class="mx-8">My favorite person 💌</span>
+          <span class="mx-8">Happy Birthday, Sayangku 💖</span>
+          <span class="mx-8">You are loved 🌸</span>
+          <span class="mx-8">20 looks beautiful on you ✨</span>
+          <span class="mx-8">My favorite person 💌</span>
+        </div>
       </div>
     </section>
 
@@ -3320,6 +3524,34 @@
       </div>
     </section>
 
+    <!-- VIDEO MOMENT -->
+    <section id="videoMoment" class="px-5 py-20">
+      <div class="mx-auto max-w-6xl glass rounded-[3rem] p-6 text-center shadow-pinksoft reveal sm:p-10 md:p-14">
+        <div class="mx-auto grid h-20 w-20 place-items-center rounded-[1.8rem] bg-gradient-to-br from-magenta to-candy text-5xl shadow-neon float-soft">🎬</div>
+        <p class="mt-7 inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-2 font-black text-blush backdrop-blur-xl">Video Moment</p>
+      
+   
+
+        <div class="relative mx-auto mt-9 max-w-4xl overflow-hidden rounded-[2.5rem] border border-white/15 bg-black/55 p-3 shadow-neon">
+          <div class="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-magenta/25 blur-3xl"></div>
+          <div class="absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-candy/20 blur-3xl"></div>
+          <video
+            id="momentVideo"
+            class="relative z-10 aspect-video w-full rounded-[2rem] bg-black object-cover shadow-2xl"
+            controls
+            playsinline
+            preload="metadata"
+            poster="./moment-foto.jpeg"
+          >
+            <source src="./moment.mp4" type="video/mp4" />
+            Browser Sayangku belum mendukung pemutar video.
+          </video>
+        </div>
+
+   
+      </div>
+    </section>
+
     <footer class="border-t border-white/10 px-5 py-10 text-center text-sm font-bold text-white/45">
       Made with infinite love for Sayangku · 20th Birthday 💖
     </footer>
@@ -3514,7 +3746,7 @@
           unlockButton.disabled = false;
           unlockButton.hidden = false;
           unlockButton.classList.add('countdown-ready');
-          unlockButton.innerHTML = 'Buka 💖';
+          unlockButton.innerHTML = 'Buka Sayang 💖';
           if (unlockButton.dataset.readyShown !== 'true') {
             unlockButton.dataset.readyShown = 'true';
           }
@@ -4575,6 +4807,186 @@
   document.addEventListener('touchstart', function () {
     restorePageInteractivity();
   }, { passive: true, capture: true });
+})();
+</script>
+
+
+<script id="story-slide-system">
+(function () {
+  var currentSlideIndex = 0;
+  var storySlides = [];
+  var slideSystemReady = false;
+
+  function getMainWebsite() {
+    return document.getElementById('mainWebsite');
+  }
+
+  function getSlideTitle(section, index) {
+    var heading = section.querySelector('h1, h2, h3');
+    if (heading && heading.textContent.trim()) {
+      return heading.textContent.trim().replace(/\s+/g, ' ').slice(0, 44);
+    }
+    if (section.id) return section.id;
+    return 'Bagian ' + (index + 1);
+  }
+
+  function createDots(total, activeIndex) {
+    var html = '';
+    for (var i = 0; i < total; i += 1) {
+      html += '<button type="button" class="slide-dot' + (i === activeIndex ? ' active' : '') + '" aria-label="Buka slide ' + (i + 1) + '" onclick="showStorySlide(' + i + ')"></button>';
+    }
+    return html;
+  }
+
+  function buildSlideNav(section, index, total) {
+    if (section.querySelector('[data-slide-nav="true"]')) return;
+
+    var nav = document.createElement('div');
+    nav.className = 'slide-next-area';
+    nav.setAttribute('data-slide-nav', 'true');
+    nav.setAttribute('aria-label', 'Navigasi slide');
+
+    var backClass = index === 0 ? 'slide-back-btn is-disabled' : 'slide-back-btn';
+    var nextLabel = index === total - 1 ? 'Ulangi dari Awal 💗' : 'Lanjut 💖';
+    var nextAction = index === total - 1 ? 'showStorySlide(0)' : 'nextStorySlide()';
+
+    nav.innerHTML =
+      '<div class="slide-nav-inner">' +
+        '<span class="slide-step-text">Slide ' + (index + 1) + ' / ' + total + '</span>' +
+        '<div class="slide-dots" aria-hidden="false">' + createDots(total, index) + '</div>' +
+        '<div class="slide-buttons">' +
+          '<button type="button" class="' + backClass + '" onclick="prevStorySlide()">← Kembali</button>' +
+          '<button type="button" class="slide-next-btn" onclick="' + nextAction + '">' + nextLabel + '</button>' +
+        '</div>' +
+      '</div>';
+
+    section.appendChild(nav);
+  }
+
+  function refreshSlideNav() {
+    storySlides.forEach(function (section, index) {
+      var step = section.querySelector('.slide-step-text');
+      var back = section.querySelector('.slide-back-btn');
+      var next = section.querySelector('.slide-next-btn');
+      var dots = section.querySelectorAll('.slide-dot');
+
+      if (step) step.textContent = 'Slide ' + (currentSlideIndex + 1) + ' / ' + storySlides.length;
+      if (back) back.classList.toggle('is-disabled', currentSlideIndex === 0);
+      if (next) {
+        if (currentSlideIndex === storySlides.length - 1) {
+          next.textContent = 'Ulangi dari Awal 💗';
+          next.setAttribute('onclick', 'showStorySlide(0)');
+        } else {
+          next.textContent = 'Lanjut 💖';
+          next.setAttribute('onclick', 'nextStorySlide()');
+        }
+      }
+      dots.forEach(function (dot, dotIndex) {
+        dot.classList.toggle('active', dotIndex === currentSlideIndex);
+      });
+    });
+  }
+
+  function setupStorySlides() {
+    var main = getMainWebsite();
+    if (!main) return;
+
+    storySlides = Array.prototype.slice.call(main.children).filter(function (child) {
+      return child && child.tagName && child.tagName.toLowerCase() === 'section';
+    });
+
+    if (!storySlides.length) return;
+
+    main.classList.add('story-mode');
+
+    storySlides.forEach(function (section, index) {
+      section.classList.add('story-slide');
+      section.setAttribute('data-slide-index', String(index));
+      section.setAttribute('data-slide-title', getSlideTitle(section, index));
+      buildSlideNav(section, index, storySlides.length);
+    });
+
+    slideSystemReady = true;
+    showStorySlide(currentSlideIndex, true);
+  }
+
+  function showStorySlide(index, instant) {
+    if (!slideSystemReady) setupStorySlides();
+    if (!storySlides.length) return;
+
+    currentSlideIndex = Math.max(0, Math.min(index, storySlides.length - 1));
+
+    storySlides.forEach(function (section, sectionIndex) {
+      var isActive = sectionIndex === currentSlideIndex;
+      section.classList.toggle('active', isActive);
+      section.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      if (isActive) {
+        section.querySelectorAll('.reveal').forEach(function (item) {
+          item.classList.add('show');
+        });
+      }
+    });
+
+    refreshSlideNav();
+
+    var progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+      var progress = storySlides.length > 1 ? (currentSlideIndex / (storySlides.length - 1)) * 100 : 100;
+      progressBar.style.width = progress + '%';
+    }
+
+    if (!instant) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (typeof popHearts === 'function') {
+        popHearts(window.innerWidth / 2, window.innerHeight - 90, 8);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function nextStorySlide() {
+    if (currentSlideIndex < storySlides.length - 1) {
+      showStorySlide(currentSlideIndex + 1);
+    } else {
+      showStorySlide(0);
+    }
+  }
+
+  function prevStorySlide() {
+    if (currentSlideIndex > 0) showStorySlide(currentSlideIndex - 1);
+  }
+
+  window.showStorySlide = showStorySlide;
+  window.nextStorySlide = nextStorySlide;
+  window.prevStorySlide = prevStorySlide;
+  window.setupStorySlides = setupStorySlides;
+
+  document.addEventListener('DOMContentLoaded', setupStorySlides);
+  window.addEventListener('load', function () {
+    setupStorySlides();
+    setTimeout(function () { showStorySlide(0, true); }, 120);
+  });
+
+  if (window.unlockWebsite && !window.unlockWebsite.__slideWrapped) {
+    var originalUnlockWebsite = window.unlockWebsite;
+    window.unlockWebsite = function () {
+      var result = originalUnlockWebsite.apply(this, arguments);
+      setTimeout(function () {
+        setupStorySlides();
+        showStorySlide(0, true);
+      }, 980);
+      return result;
+    };
+    window.unlockWebsite.__slideWrapped = true;
+  }
+
+  document.addEventListener('keydown', function (event) {
+    var main = getMainWebsite();
+    if (!main || main.classList.contains('hidden')) return;
+    if (event.key === 'ArrowRight' || event.key === 'PageDown') nextStorySlide();
+    if (event.key === 'ArrowLeft' || event.key === 'PageUp') prevStorySlide();
+  });
 })();
 </script>
 
