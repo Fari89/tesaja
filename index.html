@@ -3159,6 +3159,129 @@
   }
 </style>
 
+
+  <style id="video-moment-center-fix-style">
+    /* FIX VIDEO MOMENT:
+       Video dibuat selalu berada tepat di tengah layar, termasuk saat dibuka di HP.
+       object-fit: contain membuat video tidak kepotong dan tetap center.
+    */
+    #videoMoment {
+      width: 100% !important;
+      min-height: 100vh !important;
+      min-height: 100svh !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      background: #000 !important;
+      overflow: hidden !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    @supports (height: 100dvh) {
+      #videoMoment { min-height: 100dvh !important; }
+    }
+
+    #videoMoment .moment-video-slide {
+      width: 100% !important;
+      min-height: 100vh !important;
+      min-height: 100svh !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      background: #000 !important;
+      overflow: hidden !important;
+    }
+
+    @supports (height: 100dvh) {
+      #videoMoment .moment-video-slide { min-height: 100dvh !important; }
+    }
+
+    #videoMoment .moment-video-only {
+      display: block !important;
+      width: 100% !important;
+      height: 100vh !important;
+      height: 100svh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      max-height: 100svh !important;
+      margin: 0 auto !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+      background: #000 !important;
+    }
+
+    @supports (height: 100dvh) {
+      #videoMoment .moment-video-only {
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+      }
+    }
+
+    #videoMoment.story-slide.active {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-direction: column !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      background: #000 !important;
+    }
+
+    #videoMoment.story-slide.active .slide-next-area {
+      margin-left: auto !important;
+      margin-right: auto !important;
+      left: 50% !important;
+      right: auto !important;
+      transform: translateX(-50%) !important;
+    }
+
+    @media (max-width: 640px) {
+      #videoMoment,
+      #videoMoment.story-slide.active {
+        width: 100vw !important;
+        min-height: 100vh !important;
+        min-height: 100svh !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      #videoMoment .moment-video-slide {
+        width: 100vw !important;
+        min-height: 100vh !important;
+        min-height: 100svh !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      #videoMoment .moment-video-only {
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100svh !important;
+        margin: 0 auto !important;
+        object-fit: contain !important;
+        object-position: center center !important;
+      }
+
+      #videoMoment.story-slide.active .slide-next-area {
+        position: fixed !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: max(.7rem, var(--safe-bottom)) !important;
+        width: min(calc(100vw - 1rem), 560px) !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+      }
+    }
+  </style>
+
 </head>
 
 <body class="font-inter">
@@ -3451,29 +3574,29 @@
 
         <div class="reveal mx-auto mb-10 max-w-3xl text-center">
           <p class="inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-2 font-black text-blush backdrop-blur-xl">Gantung Foto</p>
-          <h2 class="mt-5 text-4xl font-black md:text-6xl gradient-text">Jepit Foto Kita di Tali</h2>
+          <h2 class="mt-5 text-4xl font-black md:text-6xl gradient-text">Jepit Foto ke Tali</h2>
           <p class="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/65 md:text-lg">
-            Geser foto polaroid dari kanan ke dua tali di kiri, atau cukup tap sekali agar foto langsung terjepit otomatis.
+Geser ke atas atau klik saja langsung otomatis.
           </p>
         </div>
 
         <div class="photo-hanger-layout reveal">
           <div id="hangerBoard" class="hanger-board" aria-label="Area menggantung foto">
             <div class="hanger-board-title">
-              <span>✨ Space kenangan kita</span>
+              <span>Space</span>
               <span><b id="hangerCount">0</b>/8 foto tergantung</span>
             </div>
             <div class="hanger-line line-one" data-rope="1"></div>
             <div class="hanger-line line-two" data-rope="2"></div>
             <p id="hangerEmptyMessage" class="hanger-empty-message">
-              Tarik polaroid ke area ini atau tap foto di kanan. Nanti fotonya langsung dijepit di salah satu tali pink. 💖
+               tarik fotonya ke sini tawwa
             </p>
           </div>
 
           <aside class="hanger-rack" aria-label="Daftar foto polaroid yang bisa digeser">
             <div class="hanger-rack-header">
               <div>
-                <p class="text-xs font-black uppercase tracking-[.24em] text-blush/75">Polaroid pilihan</p>
+                <p class="text-xs font-black uppercase tracking-[.24em] text-blush/75">Polaroid:</p>
                 <h3 class="mt-1 text-2xl font-black text-white">Geser dari sini</h3>
               </div>
               <button onclick="resetPhotoHanger()" class="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-black text-white/85 transition hover:bg-magenta hover:text-white active:scale-95">
@@ -3595,7 +3718,7 @@
             </div>
 
             <p id="jarHintText" class="mt-5 rounded-[1.6rem] border border-magenta/20 bg-black/25 p-5 text-sm font-bold leading-7 text-blush/90">
-              Misi: buka semua kertas ucapan di dalam box sampainya penuh. Ada satu pesan spesial dan bakalan hujan cinta. 💖
+              Buka semua kertas ucapan di dalam box sampainya 10.
             </p>
           </div>
 
@@ -3639,7 +3762,7 @@
                 saya memang tidak selalu sempurna, tapi selalu berusaha membuat Sayangku merasa dicintai,
                 dihargai, dan diperlakukan sebagai seseorang yang sangat berarti.
               </p>
-              <p class="mt-5 text-right font-script text-4xl text-magenta">I love you 💖</p>
+        
             </div>
 
             <button onclick="openEnvelope()" class="btn-main absolute bottom-7 left-1/2 z-20 -translate-x-1/2 rounded-full bg-wine px-8 py-4 font-black text-white shadow-neon transition hover:-translate-y-1">
@@ -3657,11 +3780,11 @@
         <h2 class="mt-6 text-4xl font-black md:text-6xl gradient-text-dark">Sekali lagi...</h2>
         <p class="mt-5 text-2xl font-black text-blush/90">Happy Birthday, Sayangku 💖</p>
         <p class="mx-auto mt-4 max-w-3xl text-lg leading-9 text-white/70">
-          Semoga apa yang ku kasi bisa bikin Sayangku senyum. Hari ini, besok, dan seterusnya,
-          Sayangku tetap jadi seseorang yang paling spesial.
+          Semoga apa yang ku kasi bisa bikin ki senyum. Hari ini, besok, dan seterusnya,
+          Kita tetap jadi seseorang yang paling kusayang.
         </p>
         <button onclick="finalSurprise()" class="btn-main mt-8 rounded-full bg-gradient-to-r from-magenta to-candy px-9 py-4 font-black text-white shadow-neon transition hover:-translate-y-1">
-          Klik Untuk Hujan Cinta 💗
+          Klik  💗
         </button>
       </div>
     </section>
@@ -3683,6 +3806,65 @@
         </video>
       </div>
     </section>
+
+
+<!-- DANA KAGET - SLIDE TERAKHIR -->
+<section
+  id="danaKaget"
+  class="relative min-h-screen overflow-hidden px-4 py-12 flex items-center justify-center sm:px-5 sm:py-16"
+>
+  <!-- Dekorasi kecil -->
+  <div class="pointer-events-none absolute left-[7%] top-[9%] text-4xl opacity-20 float-soft sm:text-5xl">
+    💸
+  </div>
+  <div
+    class="pointer-events-none absolute right-[8%] bottom-[10%] text-4xl opacity-20 float-soft sm:text-5xl"
+    style="animation-delay:1s"
+  >
+    💖
+  </div>
+
+  <div class="reveal mx-auto w-full max-w-3xl">
+    <div
+      class="relative overflow-hidden rounded-[2rem] border border-white/15 bg-gradient-to-br from-white/10 via-magenta/10 to-black/35 p-3 text-center shadow-pinksoft backdrop-blur-xl sm:rounded-[3rem] sm:p-5"
+    >
+      <!-- Glow background -->
+      <div class="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-magenta/20 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-24 -right-20 h-64 w-64 rounded-full bg-candy/15 blur-3xl"></div>
+
+      <!-- Judul -->
+      <h2 class="relative z-10 mb-4 text-center text-3xl font-black leading-tight gradient-text sm:text-4xl md:text-6xl">
+        Scan dulu tawwa
+      </h2>
+
+      <!-- Foto / QR Dana -->
+      <div
+        class="relative z-10 mx-auto flex max-h-[72svh] w-full items-center justify-center overflow-hidden rounded-[1.55rem] border border-white/20 bg-black/30 shadow-neon sm:max-h-[76vh] sm:rounded-[2.35rem]"
+      >
+        <!-- 
+          GANTI FOTO INI DENGAN FOTO KAMU SENDIRI.
+          Simpan foto di folder yang sama dengan file HTML,
+          lalu beri nama: dana.jpeg
+        -->
+        <img
+          src="./dana.jpeg"
+          alt="Scan Dana untuk Sayangku"
+          loading="lazy"
+          decoding="async"
+          class="block max-h-[72svh] w-full object-contain sm:max-h-[76vh]"
+          onerror="this.onerror=null; this.src='./foto1.jpeg';"
+        />
+      </div>
+
+      <!-- Caption singkat -->
+      <p class="relative z-10 mx-auto mt-4 max-w-xl text-center text-sm font-bold leading-6 text-blush sm:text-base">
+        “maaf sayang sedikit, ini mami kodong di Dana ku HAHAHAHA”
+      </p>
+    </div>
+  </div>
+</section>
+```
+
 
     <footer class="border-t border-white/10 px-5 py-10 text-center text-sm font-bold text-white/45">
       Made with infinite love for Sayangku · 20th Birthday 💖
